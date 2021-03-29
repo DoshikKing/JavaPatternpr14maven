@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
-//@RequestMapping("/home")
 public class CardController {
     @Autowired
     private BankWork bankWork;
@@ -19,7 +16,7 @@ public class CardController {
         return "home";
     }
 
-    @GetMapping("/show")
+    @GetMapping("/home/show")
     public @ResponseBody String show(){
         String buff = "<h>Banks</h><table border=1>";
         int i = 0;
@@ -46,7 +43,7 @@ public class CardController {
         return buff;
     }
 
-    @PostMapping("/addBank")
+    @PostMapping("/home/addBank")
     public String add(@RequestParam String name,
                       @RequestParam String address){
         Bank bank = new Bank();
@@ -55,7 +52,7 @@ public class CardController {
         bankWork.saveBank(bank);
         return "home";
     }
-    @PostMapping("/addCard")
+    @PostMapping("/home/addCard")
     public String add(@RequestParam int cardNumber,
                       @RequestParam int code){
         Card card = new Card();
@@ -64,12 +61,12 @@ public class CardController {
         bankWork.saveCard(card);
         return "home";
     }
-    @GetMapping("/removeCard")
+    @GetMapping("/home/removeCard")
     public @ResponseBody String removeCards(@RequestParam int id){
         bankWork.removeCards(id);
         return show();
     }
-    @GetMapping("/removeBank")
+    @GetMapping("/home/removeBank")
     public @ResponseBody String removeBanks(@RequestParam int id){
         bankWork.removeBanks(id);
         return show();
